@@ -1,0 +1,1 @@
+FONT = ("Segoe UI", 12)
