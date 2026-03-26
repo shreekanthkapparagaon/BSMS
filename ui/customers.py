@@ -3,8 +3,17 @@ from ttkbootstrap.constants import *
 from tkinter import messagebox
 from database import conn
 import sqlite3
-
 from auth import check_permission
+import os
+import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS  
+    except AttributeError:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 DB_NAME = "bsms.db"
 
@@ -278,6 +287,7 @@ class CustomerApp(tb.Frame):
         popup = tb.Toplevel(self)
         popup.title("Customer Statement")
         popup.geometry("700x500")
+        popup.iconbitmap(resource_path("assets/icon.ico"))
 
         # Title
         tb.Label(popup,

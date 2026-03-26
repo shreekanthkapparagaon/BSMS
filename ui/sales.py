@@ -4,8 +4,15 @@ from tkinter import messagebox
 from database import cursor, conn
 from datetime import datetime
 import os
-import tempfile
+import sys
 
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS  
+    except AttributeError:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 class SalesApp(tb.Frame):
     def __init__(self, master, user=None):
@@ -548,6 +555,7 @@ class SalesApp(tb.Frame):
         win = tb.Toplevel(self)
         win.title("Invoice")
         win.geometry("300x450+500+200")
+        win.iconbitmap(resource_path("assets/icon.ico"))
 
         container = tb.Frame(win, padding=15)
         container.pack(fill="both", expand=True)

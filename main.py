@@ -7,14 +7,20 @@ from ui.sales import SalesApp
 from ui.customers import CustomerApp
 from ui.users import UserManagement
 from ui.settings import SettingsPage
+from ui.about import AboutDialog
 from auth import check_permission
 from PIL import Image, ImageTk
 import os
 import sys
 from dotenv import load_dotenv
-load_dotenv()
+from utils.version import get_version
 
+load_dotenv()
 DEV_MODE = os.getenv("APP_MODE") == "DEV"
+
+version = get_version()
+
+
 
 def resource_path(relative_path):
     try:
@@ -75,6 +81,21 @@ class MainApp(tb.Window):
 
         self.content = tb.Frame(container)
         self.content.pack(side=RIGHT, fill=BOTH, expand=True)
+
+        footer = tb.Frame(self.content)
+        footer.pack(side=BOTTOM, fill=X)
+
+        footer_label = tb.Label(
+            footer,
+            text=f"BSMS {version}  |  © 2026 Shreekant N.K | About",
+            font=("Segoe UI", 9),
+            anchor=CENTER,
+            foreground="#adb5bd",
+            cursor="hand2"
+        )
+        footer_label.pack(fill=X, padx=10, pady=3)
+
+        footer_label.bind("<Button-1>", lambda e: self.show_about())
 
         role = self.user["role"]
 
@@ -173,6 +194,9 @@ class MainApp(tb.Window):
         else:
             self.show(SalesApp, btn_sales)
 
+    def show_about(self):
+        AboutDialog(self)
+
     def show(self, frame_class, btn):
         # Reset previous button
 
@@ -203,6 +227,7 @@ class MainApp(tb.Window):
         self.active_btn = btn
         btn.configure(bootstyle="primary")
         self.content.update_idletasks()
+    
     def clear(self):
         for w in self.winfo_children():
             w.destroy()

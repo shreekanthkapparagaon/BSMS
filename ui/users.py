@@ -2,7 +2,16 @@ import ttkbootstrap as tb
 from ttkbootstrap.constants import *
 from tkinter import messagebox
 from database import cursor, conn, hash_password
+import os
+import sys
 
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS  
+    except AttributeError:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 class UserManagement(tb.Frame):
     def __init__(self, master, current_user_role):
@@ -246,6 +255,8 @@ class UserManagement(tb.Frame):
         popup.title("Edit User")
         popup.geometry("350x300")
         popup.resizable(False, False)
+        popup.iconbitmap(resource_path("assets/icon.ico"))
+        
 
         # Center popup
         popup.transient(self)
