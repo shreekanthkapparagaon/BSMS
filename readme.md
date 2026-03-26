@@ -82,7 +82,7 @@ BSMS/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/BSMS.git
+git clone https://github.com/shreekanthkapparagaon/BSMS.git
 cd BSMS
 ```
 

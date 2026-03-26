@@ -18,8 +18,8 @@ env/
 Thumbs.db
 
 # Build files
-dist/
-build/
+dist_build/
+build_temp/
 *.spec
 
 # VS Code
